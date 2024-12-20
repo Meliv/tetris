@@ -1,18 +1,20 @@
 class_name Block
 
-var _positions: Array[Vector2i]
-var _grid: Grid
-var _color: Enums.TileColor
+var positions: Array[Vector2i]
 
-func _init(grid: Grid, color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
+var _color: Enums.TileColor
+var color: Enums.TileColor:
+	get: return _color
+
+func _init(color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
 	if self.get_class() == "Block":
-		push_error("Cannot instantiate Block class directly")
+		push_error("Cannot instantiate Block object directly")
 		return
 	
-	_grid = grid
 	_color = color
-	_positions = spawn_positions
+	positions = spawn_positions
 
+'''
 func can_move() -> bool:
 	for p in _positions:
 		if _grid.cell_occupied(p) and !_positions.any(func(x): x == p):
@@ -29,7 +31,4 @@ func move(movement: Vector2i) -> void:
 		
 	_positions = new_positions
 
-# Obsolete. Should be controlled by the grid
-func render() -> void:
-	for p: Vector2i in _positions:
-		_grid.set_tile(p, p, _color)
+'''

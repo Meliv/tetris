@@ -16,9 +16,7 @@ var x_mod: float = 0
 
 func _ready() -> void:
 	grid = Grid.new(tile_map_layer)
-	
-	active_block = TBlock.new(grid)
-	#active_block.render()
+	active_block = grid.spawn_block()
 	
 func _input(event):
 	if event.is_action_pressed("ui_down"):
@@ -29,15 +27,20 @@ func _input(event):
 
 func _process(delta: float) -> void:
 	
+	if active_block == null:
+		active_block = grid.spawn_block()
+	
 	move_counter += delta * (DROP_SPEED * y_mod)
 	if move_counter > MOVE_COUNTER_MAX:
 
+		'''
 		if active_block.can_move():
 			var new_x: int = round(Input.get_axis("ui_left", "ui_right"))
 			print(new_x)
 			active_block.move(Vector2i(new_x, 1))
 		else:
 			pass
+		'''
 
 		'''
 		var new_position: Vector2i = Vector2i(new_x, last_position.y+1)
