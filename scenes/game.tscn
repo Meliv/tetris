@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://bl87hn85aoxtq"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_hbka5"]
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_hbka5"]
 [ext_resource type="Texture2D" uid="uid://b56j50od6p8u5" path="res://sprites/tetrominoes.png" id="2_jc6c0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ri18y"]

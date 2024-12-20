@@ -11,3 +11,13 @@ enum TileColor {
 	Gray,
 	LightGray
 }
+
+enum BlockType {
+	I,
+	L,
+	R,
+	O,
+	S,
+	Z,
+	T
+}
