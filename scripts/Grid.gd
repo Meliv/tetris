@@ -51,6 +51,13 @@ func cell_is_out_of_bounds(position: Vector2i) -> bool:
 
 func set_color(position: Vector2i, color: Enums.TileColor):
 	_cells[position.y][position.x] = color
+	
+func clear_cell(position: Vector2i):
+	if position.y > 3:
+		_cells[position.y][position.x] = Enums.TileColor.Gray
+	else:
+		_cells[position.y][position.x] = Enums.TileColor.LightGray
+		
 
 func _get_color(color: Enums.TileColor) -> Vector2i:
 	var tile: Vector2i
