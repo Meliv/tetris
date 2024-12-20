@@ -23,10 +23,10 @@ func _init(tile_map_layer: TileMapLayer) -> void:
 func render() -> void:
 	for y in _cells.size():
 		for x in _cells[y].size():
-			_tile_map.set_cell(Vector2i(x, y), 3, _get_color(_cells[y][x]))
-			
+			set_color(Vector2i(x, y), _cells[y][x])
+
 func spawn_block() -> Block:
-	var block: Block = TBlock.new()
+	var block: Block = TBlock.new(self) # Needs to be randomised
 	
 	for p in block.positions:
 		_cells[p.y][p.x] = block.color
@@ -34,6 +34,12 @@ func spawn_block() -> Block:
 	render()
 	
 	return block
+	
+func cell_is_occupied(position: Vector2i) -> bool:
+	return false
+
+func set_color(position: Vector2i, color: Enums.TileColor):
+	_tile_map.set_cell(position, 3, _get_color(color))
 
 func _get_color(color: Enums.TileColor) -> Vector2i:
 	var tile: Vector2i

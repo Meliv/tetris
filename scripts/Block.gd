@@ -2,26 +2,55 @@ class_name Block
 
 var positions: Array[Vector2i]
 
+var _grid: Grid
+
 var _color: Enums.TileColor
 var color: Enums.TileColor:
 	get: return _color
 
-func _init(color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
+func _init(grid: Grid, color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
 	if self.get_class() == "Block":
 		push_error("Cannot instantiate Block object directly")
 		return
 	
+	_grid = grid
 	_color = color
 	positions = spawn_positions
 
-'''
-func can_move() -> bool:
-	for p in _positions:
-		if _grid.cell_occupied(p) and !_positions.any(func(x): x == p):
-			return false
+func can_move(move: Vector2i) -> bool:
+	
+	'''
+	Need to check the following:
+		1. Not overflowing the grid vertically
+		2. Not overflowing the grid horizontally
+		3. Able to move horizontally
+		4. Able to move vertically
+		
+		Consider an I block falling down a single empty column
+		If you move left, you hit a wall. But there's still space
+		to fall vertically down. So we can discard the X movement,
+		but the Y movement is still valid and can be applied
+		
+		We need to feed that back to the logic so it can move the
+		block appropriately
+	'''
+	
+	
+	for p in positions:
+		if _grid.cell_is_occupied(p):
+			#return false
+			return true
 	
 	return true
+	
+func move(movement: Vector2i) -> void:
+	var new_positions: Array[Vector2i] = []
+	for p in positions:
+		_grid.set
+		new_positions.append(p + movement)
+	positions = new_positions
 
+'''
 func move(movement: Vector2i) -> void:
 	var new_positions: Array[Vector2i] = []
 	for p in _positions:

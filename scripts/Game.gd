@@ -33,14 +33,12 @@ func _process(delta: float) -> void:
 	move_counter += delta * (DROP_SPEED * y_mod)
 	if move_counter > MOVE_COUNTER_MAX:
 
-		'''
-		if active_block.can_move():
-			var new_x: int = round(Input.get_axis("ui_left", "ui_right"))
-			print(new_x)
-			active_block.move(Vector2i(new_x, 1))
+		var next_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 1)
+		if active_block.can_move(next_move):
+			active_block.move(next_move)
+			pass
 		else:
 			pass
-		'''
 
 		'''
 		var new_position: Vector2i = Vector2i(new_x, last_position.y+1)
