@@ -35,10 +35,16 @@ func _process(delta: float) -> void:
 
 		var next_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 1)
 		if active_block.can_move(next_move):
+			print("Block can move X and Y: ", next_move)
 			active_block.move(next_move)
-			pass
+		elif active_block.can_move(Vector2i(0, 1)): # Vertical move only
+			# This seems inefficient. If not X input but 
+			# not valid this will be checked twice
+			print("Block can move Y: ", Vector2i(0, 1))
+			active_block.move(Vector2i(0, 1))
 		else:
-			pass
+			print("Block can't move")
+			active_block = null
 
 		'''
 		var new_position: Vector2i = Vector2i(new_x, last_position.y+1)

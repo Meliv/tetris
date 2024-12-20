@@ -37,18 +37,22 @@ func can_move(move: Vector2i) -> bool:
 	
 	
 	for p in positions:
-		if _grid.cell_is_occupied(p):
-			#return false
-			return true
+		var is_occupied: bool = _grid.cell_is_occupied(p+move)
+		var is_oob: bool = _grid.cell_is_out_of_bounds(p+move)
+		var is_self: bool = p+move in positions
+		
+		if (is_occupied or is_oob) and not is_self:
+			return false
 	
 	return true
 	
 func move(movement: Vector2i) -> void:
 	var new_positions: Array[Vector2i] = []
 	for p in positions:
-		_grid.set
+		_grid.set_color(p + movement, color)
 		new_positions.append(p + movement)
 	positions = new_positions
+	_grid.render()
 
 '''
 func move(movement: Vector2i) -> void:

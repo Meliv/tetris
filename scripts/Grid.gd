@@ -23,7 +23,7 @@ func _init(tile_map_layer: TileMapLayer) -> void:
 func render() -> void:
 	for y in _cells.size():
 		for x in _cells[y].size():
-			set_color(Vector2i(x, y), _cells[y][x])
+			_tile_map.set_cell(Vector2i(x, y), 3, _get_color(_cells[y][x]))
 
 func spawn_block() -> Block:
 	var block: Block = TBlock.new(self) # Needs to be randomised
@@ -36,10 +36,21 @@ func spawn_block() -> Block:
 	return block
 	
 func cell_is_occupied(position: Vector2i) -> bool:
+	if _cells[position.y][position.x] in [Enums.TileColor.LightGray, Enums.TileColor.Gray]:
+		return false
+	
+	return true
+	
+func cell_is_out_of_bounds(position: Vector2i) -> bool:
+	if position.y >= 24:
+		return true
+	if position.x < 0 or position.x > 9:
+		return true
+	
 	return false
 
 func set_color(position: Vector2i, color: Enums.TileColor):
-	_tile_map.set_cell(position, 3, _get_color(color))
+	_cells[position.y][position.x] = color
 
 func _get_color(color: Enums.TileColor) -> Vector2i:
 	var tile: Vector2i
