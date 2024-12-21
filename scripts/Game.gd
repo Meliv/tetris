@@ -46,19 +46,6 @@ func _process(delta: float) -> void:
 			print("Block can't move")
 			active_block = null
 
-		'''
-		var new_position: Vector2i = Vector2i(new_x, last_position.y+1)
-		
-		if new_position.y < 24:
-			var last_pos_color: Enums.TileColor = Enums.TileColor.Gray
-			
-			if last_position.y < 4:
-				last_pos_color = Enums.TileColor.LightGray
-			
-			grid.set_tile(last_position, last_pos_color)
-			grid.set_tile(new_position, Enums.TileColor.Red)
-			last_position = new_position
-		'''
 		move_counter = 0
 	
 	pass
