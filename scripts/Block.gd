@@ -33,3 +33,17 @@ func move(movement: Vector2i) -> void:
 		new_positions.append(p + movement)
 	positions = new_positions
 	_grid.render()
+	
+static func random(grid: Grid) -> Block:
+	var block: Block
+	var random = RandomNumberGenerator.new()
+	match random.randi_range(0, 6):
+		Enums.BlockType.I: block = IBlock.new(grid)
+		Enums.BlockType.L: block = LBlock.new(grid)
+		Enums.BlockType.O: block = OBlock.new(grid)
+		Enums.BlockType.R: block = RBlock.new(grid)
+		Enums.BlockType.S: block = SBlock.new(grid)
+		Enums.BlockType.T: block = TBlock.new(grid)
+		Enums.BlockType.Z: block = ZBlock.new(grid)
+	
+	return block

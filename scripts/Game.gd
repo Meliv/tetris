@@ -2,8 +2,8 @@ extends Node
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
-const DROP_SPEED: float = 10.0
-const MOVE_COUNTER_MAX: float = 10.0
+@export var drop_speed: float = 25.0
+@export var move_counter_max: float = 10.0
 
 var grid: Grid
 
@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 	if active_block == null:
 		active_block = grid.spawn_block()
 	
-	move_counter += delta * (DROP_SPEED * y_mod)
-	if move_counter > MOVE_COUNTER_MAX:
+	move_counter += delta * (drop_speed * y_mod)
+	if move_counter > move_counter_max:
 
 		var next_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 1)
 		if active_block.can_move(next_move):
