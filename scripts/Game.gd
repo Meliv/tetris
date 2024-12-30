@@ -25,15 +25,13 @@ func _input(event):
 	if event.is_action_released("ui_down"):
 		y_mod = 1
 		
-	if round(Input.get_axis("ui_left", "ui_right")) != 0:
-		x_mod = round(Input.get_axis("ui_left", "ui_right"))
+	x_mod = round(Input.get_axis("ui_left", "ui_right"))
 	
 func _process(delta: float) -> void:
 	
 	if active_block == null:
 		active_block = grid.spawn_block()
 		
-	#var x_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 0)
 	if x_mod != 0 and active_block.can_move(Vector2i(x_mod,0)):
 		active_block.move(Vector2i(x_mod,0))
 		x_mod = 0
