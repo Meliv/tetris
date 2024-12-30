@@ -60,6 +60,19 @@ func clear_cell(position: Vector2i):
 func set_color(position: Vector2i, color: Enums.TileColor):
 	_cells[position.y][position.x] = color
 
+func clear_lines() -> void:
+	var i: int = 23
+	while i != 3:
+		if not _cells[i].any(func(x): return x == Enums.TileColor.Gray):
+			_cells.remove_at(i)
+			var new_row = []
+			new_row.resize(10)
+			new_row.fill(Enums.TileColor.Gray)
+			_cells.insert(4, new_row)
+			continue
+		
+		i -= 1
+	
 func _get_color(color: Enums.TileColor) -> Vector2i:
 	var tile: Vector2i
 	match color:

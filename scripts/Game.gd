@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		active_block = grid.spawn_block()
 		
 	if r_mod:
-		active_block.rotate()
+		active_block.rotate() # Need to check if can rotate and wall kick if able
 		r_mod = false
 		return
 		
@@ -52,7 +52,6 @@ func _process(delta: float) -> void:
 			active_block.move(Vector2i(0, 1))
 		else:
 			active_block = null
+			grid.clear_lines()
 
 		move_counter = 0
-	
-	pass
