@@ -27,12 +27,12 @@ func render() -> void:
 
 func spawn_block() -> Block:
 	#var block: Block = Block.random(self) # Needs to be randomised
-	var block: Block = TBlock.new(self) # Needs to be randomised
+	var block: Block = ZBlock.new(self) # Needs to be randomised
 	
 	for p in block.positions:
 		# Can this just be an array of Vectors?
 		# Or a dictionary of Vectors?
-		_cells[p.y][p.x] = block.color 
+		_cells[p.y][p.x] = block.color
 	
 	render()
 	
@@ -64,13 +64,13 @@ func set_color(position: Vector2i, color: Enums.TileColor):
 func _get_color(color: Enums.TileColor) -> Vector2i:
 	var tile: Vector2i
 	match color:
-		Enums.TileColor.LightBlue: tile = Vector2i(0,0)
-		Enums.TileColor.Blue: tile = Vector2i(1,0)
-		Enums.TileColor.Orange: tile = Vector2i(2,0)
-		Enums.TileColor.Yellow: tile = Vector2i(3,0)
-		Enums.TileColor.Green: tile = Vector2i(4,0)
-		Enums.TileColor.Purple: tile = Vector2i(5,0)
-		Enums.TileColor.Red: tile = Vector2i(6,0)
-		Enums.TileColor.Gray: tile = Vector2i(0,1)
-		Enums.TileColor.LightGray: tile = Vector2i(1,1)
+		Enums.TileColor.LightBlue: tile = Vector2i(0, 0)
+		Enums.TileColor.Blue: tile = Vector2i(1, 0)
+		Enums.TileColor.Orange: tile = Vector2i(2, 0)
+		Enums.TileColor.Yellow: tile = Vector2i(3, 0)
+		Enums.TileColor.Green: tile = Vector2i(4, 0)
+		Enums.TileColor.Purple: tile = Vector2i(5, 0)
+		Enums.TileColor.Red: tile = Vector2i(6, 0)
+		Enums.TileColor.Gray: tile = Vector2i(0, 1)
+		Enums.TileColor.LightGray: tile = Vector2i(1, 1)
 	return tile
