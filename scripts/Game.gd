@@ -24,26 +24,26 @@ func _input(event):
 	
 	if event.is_action_released("ui_down"):
 		y_mod = 1
-
+		
+	if round(Input.get_axis("ui_left", "ui_right")) != 0:
+		x_mod = round(Input.get_axis("ui_left", "ui_right"))
+	
 func _process(delta: float) -> void:
 	
 	if active_block == null:
 		active_block = grid.spawn_block()
+		
+	#var x_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 0)
+	if x_mod != 0 and active_block.can_move(Vector2i(x_mod,0)):
+		active_block.move(Vector2i(x_mod,0))
+		x_mod = 0
 	
 	move_counter += delta * (drop_speed * y_mod)
 	if move_counter > move_counter_max:
 
-		var next_move: Vector2i = Vector2i(round(Input.get_axis("ui_left", "ui_right")), 1)
-		if active_block.can_move(next_move):
-			print("Block can move X and Y: ", next_move)
-			active_block.move(next_move)
-		elif active_block.can_move(Vector2i(0, 1)): # Vertical move only
-			# This seems inefficient. If not X input but 
-			# not valid this will be checked twice
-			print("Block can move Y: ", Vector2i(0, 1))
+		if active_block.can_move(Vector2i(0, 1)):
 			active_block.move(Vector2i(0, 1))
 		else:
-			print("Block can't move")
 			active_block = null
 
 		move_counter = 0

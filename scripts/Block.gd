@@ -27,10 +27,16 @@ func can_move(move: Vector2i) -> bool:
 	
 func move(movement: Vector2i) -> void:
 	var new_positions: Array[Vector2i] = []
+	
+	# Clear first then draw. Stops individual
+	# blocks in shape overwriting eachother
+	for p in positions:
+		_grid.clear_cell(p)
+	
 	for p in positions:
 		_grid.set_color(p + movement, color)
-		_grid.clear_cell(p)
 		new_positions.append(p + movement)
+		
 	positions = new_positions
 	_grid.render()
 	
