@@ -8,19 +8,19 @@ var _color: Enums.TileColor
 var color: Enums.TileColor:
 	get: return _color
 
-func _init(grid: Grid, color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
+func _init(grid: Grid, block_color: Enums.TileColor, spawn_positions: Array[Vector2i]) -> void:
 	if self.get_class() == "Block":
 		push_error("Cannot instantiate Block object directly")
 		return
 	
 	_grid = grid
-	_color = color 
+	_color = block_color 
 	positions = spawn_positions
 
-func can_move(move: Vector2i) -> bool:
+func can_move(destination: Vector2i) -> bool:
 	for p in positions:
-		var is_self: bool = p+move in positions
-		if (_grid.cell_is_out_of_bounds(p+move) or _grid.cell_is_occupied(p+move)) and not is_self:
+		var is_self: bool = p+destination in positions
+		if (_grid.cell_is_out_of_bounds(p+destination) or _grid.cell_is_occupied(p+destination)) and not is_self:
 			return false
 	
 	return true
@@ -42,8 +42,8 @@ func move(movement: Vector2i) -> void:
 	
 static func random(grid: Grid) -> Block:
 	var block: Block
-	var random = RandomNumberGenerator.new()
-	match random.randi_range(0, 6):
+	var gen = RandomNumberGenerator.new()
+	match gen.randi_range(0, 6):
 		Enums.BlockType.I: block = IBlock.new(grid)
 		Enums.BlockType.L: block = LBlock.new(grid)
 		Enums.BlockType.O: block = OBlock.new(grid)

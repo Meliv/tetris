@@ -11,8 +11,8 @@ var active_block: Block
 
 var move_counter: float = 0
 
-var y_mod: float = 1
-var x_mod: float = 0
+var y_mod: int = 1
+var x_mod: int = 0
 
 func _ready() -> void:
 	grid = Grid.new(tile_map_layer)
