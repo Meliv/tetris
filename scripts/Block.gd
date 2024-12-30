@@ -43,6 +43,12 @@ func move(movement: Vector2i) -> void:
 	_grid.render()
 	
 func rotate() -> void:
+
+	# This is naff but works for the moment
+	if self is OBlock:
+		print("Don't rotate OBlock")
+		return
+
 	var new_positions: Array[Vector2i] = []
 
 	for p in positions:

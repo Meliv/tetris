@@ -26,8 +26,7 @@ func render() -> void:
 			_tile_map.set_cell(Vector2i(x, y), 3, _get_color(_cells[y][x]))
 
 func spawn_block() -> Block:
-	#var block: Block = Block.random(self) # Needs to be randomised
-	var block: Block = ZBlock.new(self) # Needs to be randomised
+	var block: Block = Block.random(self)
 	
 	for p in block.positions:
 		# Can this just be an array of Vectors?
