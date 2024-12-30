@@ -14,13 +14,15 @@ func _init(grid: Grid, block_color: Enums.TileColor, spawn_positions: Array[Vect
 		return
 	
 	_grid = grid
-	_color = block_color 
-	positions = spawn_positions
+	_color = block_color
+	
+	for p in spawn_positions:
+		positions.append(p + grid.SPAWN_POINT)
 
 func can_move(destination: Vector2i) -> bool:
 	for p in positions:
-		var is_self: bool = p+destination in positions
-		if (_grid.cell_is_out_of_bounds(p+destination) or _grid.cell_is_occupied(p+destination)) and not is_self:
+		var is_self: bool = p + destination in positions
+		if (_grid.cell_is_out_of_bounds(p + destination) or _grid.cell_is_occupied(p + destination)) and not is_self:
 			return false
 	
 	return true
@@ -32,7 +34,7 @@ func move(movement: Vector2i) -> void:
 	# blocks in shape overwriting eachother
 	for p in positions:
 		_grid.clear_cell(p)
-	
+
 	for p in positions:
 		_grid.set_color(p + movement, color)
 		new_positions.append(p + movement)
@@ -40,6 +42,21 @@ func move(movement: Vector2i) -> void:
 	positions = new_positions
 	_grid.render()
 	
+func rotate() -> void:
+	var new_positions: Array[Vector2i] = []
+
+	for p in positions:
+		_grid.clear_cell(p)
+
+	for p in positions:
+		var adjusted_root = p - self.root_position
+		var rotated_pos = Vector2i(-adjusted_root.y, adjusted_root.x) + self.root_position
+		_grid.set_color(rotated_pos, color)
+		new_positions.append(rotated_pos)
+
+	positions = new_positions
+	_grid.render()
+
 static func random(grid: Grid) -> Block:
 	var block: Block
 	var gen = RandomNumberGenerator.new()
